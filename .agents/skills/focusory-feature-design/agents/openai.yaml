@@ -1,0 +1,4 @@
+interface:
+  display_name: "Focusory 功能设计"
+  short_description: "把产品想法收敛为可确认、可开发、可验收的 Focusory 功能设计"
+  default_prompt: "使用 $focusory-feature-design 在编码前完成这个 Focusory 功能的产品与架构设计。"

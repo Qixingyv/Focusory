@@ -1,0 +1,9 @@
+# Focusory 项目级 Codex 配置。
+# 只有当该项目被信任时，项目内的 .codex 配置层才会加载。
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[features]
+multi_agent = true
+shell_snapshot = true

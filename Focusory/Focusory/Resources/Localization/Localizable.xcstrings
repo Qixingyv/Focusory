@@ -1,0 +1,1088 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "" : {},
+    "account.action.signOut" : {
+      "comment" : "账户区域中的退出登录操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出登录"
+          }
+        }
+      }
+    },
+    "account.defaultUserName" : {
+      "comment" : "尚未接入账户功能时显示的默认用户名。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "专注用户"
+          }
+        }
+      }
+    },
+    "account.localWorkspace" : {
+      "comment" : "账户区域中表示当前使用本地工作空间的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本地工作空间"
+          }
+        }
+      }
+    },
+    "account.signOut.confirmation.message" : {
+      "comment" : "退出登录确认框的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出后将返回登录页，本机数据清理将在账户功能接入后实现"
+          }
+        }
+      }
+    },
+    "account.signOut.confirmation.title" : {
+      "comment" : "退出登录确认框标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出登录？"
+          }
+        }
+      }
+    },
+    "app.sync.status" : {
+      "comment" : "页面顶部显示的同步状态。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已同步"
+          }
+        }
+      }
+    },
+    "common.action.cancel" : {
+      "comment" : "取消当前操作的通用按钮。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "common.action.confirm" : {
+      "comment" : "确认当前操作的通用按钮。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认"
+          }
+        }
+      }
+    },
+    "examples.zStack.foreground" : {
+      "comment" : "这是 ZStack 学习预览的前景文字。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前景文字"
+          }
+        }
+      }
+    },
+    "focus.placeholder.description" : {
+      "comment" : "专注功能尚未实现时的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前迭代先完成菜单和任务界面。"
+          }
+        }
+      }
+    },
+    "focus.placeholder.title" : {
+      "comment" : "专注功能尚未实现时的标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "专注界面即将实现"
+          }
+        }
+      }
+    },
+    "navigation.focus.subtitle" : {
+      "comment" : "专注页面标题下方的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "围绕一个任务，安静完成当前这一轮"
+          }
+        }
+      }
+    },
+    "navigation.focus.title" : {
+      "comment" : "专注页面和侧边栏导航标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "专注"
+          }
+        }
+      }
+    },
+    "navigation.statistics.subtitle" : {
+      "comment" : "统计页面标题下方的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "回看今天真实完成的专注投入"
+          }
+        }
+      }
+    },
+    "navigation.statistics.title" : {
+      "comment" : "统计页面和侧边栏导航标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "统计"
+          }
+        }
+      }
+    },
+    "navigation.tasks.subtitle" : {
+      "comment" : "任务页面标题下方的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "整理要投入的事项，让下一轮专注更清晰"
+          }
+        }
+      }
+    },
+    "navigation.tasks.title" : {
+      "comment" : "任务页面和侧边栏导航标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "任务"
+          }
+        }
+      }
+    },
+    "statistics.placeholder.description" : {
+      "comment" : "统计功能尚未实现时的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成专注会话后，这里将展示今日投入。"
+          }
+        }
+      }
+    },
+    "statistics.placeholder.title" : {
+      "comment" : "统计功能尚未实现时的标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "统计界面即将实现"
+          }
+        }
+      }
+    },
+    "tasks.action.abandon" : {
+      "comment" : "放弃已有历史任务的操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "放弃任务"
+          }
+        }
+      }
+    },
+    "tasks.action.appendCustom" : {
+      "comment" : "达标反馈中打开自定义追加数量输入的次要操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "修改追加数量"
+          }
+        }
+      }
+    },
+    "tasks.action.appendOne" : {
+      "comment" : "达标反馈中的快捷追加操作，一次追加一个番茄钟。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加 1 个番茄钟"
+          }
+        }
+      }
+    },
+    "tasks.action.complete" : {
+      "comment" : "手动完成任务的操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成任务"
+          }
+        }
+      }
+    },
+    "tasks.action.create" : {
+      "comment" : "打开新建任务弹窗的操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新建任务"
+          }
+        }
+      }
+    },
+    "tasks.action.createFirst" : {
+      "comment" : "任务为空时创建首个任务的操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "创建第一个任务"
+          }
+        }
+      }
+    },
+    "tasks.action.delete" : {
+      "comment" : "删除没有历史记录的任务的操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除任务"
+          }
+        }
+      }
+    },
+    "tasks.action.edit" : {
+      "comment" : "编辑任务的操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑任务"
+          }
+        }
+      }
+    },
+    "tasks.action.save" : {
+      "comment" : "保存任务编辑结果的按钮。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存"
+          }
+        }
+      }
+    },
+    "tasks.action.startFocus" : {
+      "comment" : "从任务开始一轮专注的操作。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始专注"
+          }
+        }
+      }
+    },
+    "tasks.append.quantity.label" : {
+      "comment" : "自定义追加数量输入项的标签。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加数量"
+          }
+        }
+      }
+    },
+    "tasks.append.title" : {
+      "comment" : "自定义追加数量弹层的标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加目标"
+          }
+        }
+      }
+    },
+    "tasks.badge.dailyGoalMet" : {
+      "comment" : "持续任务今日目标已达成的徽标。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日已达标"
+          }
+        }
+      }
+    },
+    "tasks.badge.plannedCompletion" : {
+      "comment" : "任务已经按计划达到目标的徽标。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "任务已按计划完成"
+          }
+        }
+      }
+    },
+    "tasks.confirm.abandon" : {
+      "comment" : "要求用户确认放弃任务的行内提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认放弃任务"
+          }
+        }
+      }
+    },
+    "tasks.confirm.complete" : {
+      "comment" : "要求用户确认完成任务的行内提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认完成任务"
+          }
+        }
+      }
+    },
+    "tasks.confirm.delete" : {
+      "comment" : "要求用户确认删除任务的行内提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确认删除任务"
+          }
+        }
+      }
+    },
+    "tasks.count.items" : {
+      "comment" : "任务编辑器步进器显示的通用数量，参数是当前数量。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 个"
+          }
+        }
+      }
+    },
+    "tasks.duration.minutes" : {
+      "comment" : "任务编辑器中的分钟时长，参数是分钟数。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 分钟"
+          }
+        }
+      }
+    },
+    "tasks.editor.breakDuration.label" : {
+      "comment" : "任务编辑器中的休息时长字段标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "休息时长"
+          }
+        }
+      }
+    },
+    "tasks.editor.create.title" : {
+      "comment" : "新建任务弹窗标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新建任务"
+          }
+        }
+      }
+    },
+    "tasks.editor.dailyTarget.label" : {
+      "comment" : "任务编辑器中的每日目标数字字段标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每日目标"
+          }
+        }
+      }
+    },
+    "tasks.editor.dailyTarget.toggle.description" : {
+      "comment" : "启用持续任务每日目标开关的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每日达标后可追加，不结转未完成数量"
+          }
+        }
+      }
+    },
+    "tasks.editor.dailyTarget.toggle.title" : {
+      "comment" : "启用持续任务每日目标的开关标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置每日目标"
+          }
+        }
+      }
+    },
+    "tasks.editor.dateRange.toggle.description" : {
+      "comment" : "启用持续任务计划周期开关的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "为持续任务设置开始和截止日期"
+          }
+        }
+      }
+    },
+    "tasks.editor.dateRange.toggle.title" : {
+      "comment" : "启用持续任务计划周期的开关标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置计划周期"
+          }
+        }
+      }
+    },
+    "tasks.editor.edit.title" : {
+      "comment" : "编辑现有任务的弹窗标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑任务"
+          }
+        }
+      }
+    },
+    "tasks.editor.endDate.label" : {
+      "comment" : "任务编辑器中的截止日期字段标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "截止日期"
+          }
+        }
+      }
+    },
+    "tasks.editor.focusDuration.label" : {
+      "comment" : "任务编辑器中的专注时长字段标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "专注时长"
+          }
+        }
+      }
+    },
+    "tasks.editor.mode.label" : {
+      "comment" : "任务编辑器中的任务模式字段标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "任务模式"
+          }
+        }
+      }
+    },
+    "tasks.editor.name.label" : {
+      "comment" : "任务编辑器中的任务名称字段标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "任务名称"
+          }
+        }
+      }
+    },
+    "tasks.editor.name.placeholder" : {
+      "comment" : "任务名称输入框的占位提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这次准备专注什么？"
+          }
+        }
+      }
+    },
+    "tasks.editor.startDate.label" : {
+      "comment" : "任务编辑器中的开始日期字段标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始日期"
+          }
+        }
+      }
+    },
+    "tasks.editor.todoTarget.label" : {
+      "comment" : "任务编辑器中的待办目标番茄数标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目标番茄数"
+          }
+        }
+      }
+    },
+    "tasks.empty.abandoned.description" : {
+      "comment" : "已放弃任务列表为空时的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "放弃的任务会保留在这里，方便回看"
+          }
+        }
+      }
+    },
+    "tasks.empty.abandoned.title" : {
+      "comment" : "已放弃任务列表为空时的标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还没有已放弃的任务"
+          }
+        }
+      }
+    },
+    "tasks.empty.active.description" : {
+      "comment" : "进行中任务列表为空时的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "创建任务后，就可以开始一段安静的专注"
+          }
+        }
+      }
+    },
+    "tasks.empty.active.title" : {
+      "comment" : "进行中任务列表为空时的标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还没有进行中的任务"
+          }
+        }
+      }
+    },
+    "tasks.empty.completed.description" : {
+      "comment" : "已完成任务列表为空时的说明。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成的任务会收纳在这里"
+          }
+        }
+      }
+    },
+    "tasks.empty.completed.title" : {
+      "comment" : "已完成任务列表为空时的标题。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "还没有已完成的任务"
+          }
+        }
+      }
+    },
+    "tasks.error.retry" : {
+      "comment" : "本地数据读取失败或本地存储打开失败后的重试按钮。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重试"
+          }
+        }
+      }
+    },
+    "tasks.failure.appendNotAllowed" : {
+      "comment" : "任务尚未达标、已终态或未开启每日目标时的提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前状态不可追加目标"
+          }
+        }
+      }
+    },
+    "tasks.failure.appendQuantityOutOfRange" : {
+      "comment" : "追加数量非正整数时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加数量需要是正整数"
+          }
+        }
+      }
+    },
+    "tasks.failure.breakDurationOutOfRange" : {
+      "comment" : "休息时长越界时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "休息时长为 1 至 60 分钟"
+          }
+        }
+      }
+    },
+    "tasks.failure.configurationLockedByHistory" : {
+      "comment" : "产生会话后切换配置开关被拒绝时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已有专注记录的持续任务不能再切换计划周期或每日目标"
+          }
+        }
+      }
+    },
+    "tasks.failure.dailyTargetOutOfRange" : {
+      "comment" : "每日基础目标非正整数时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每日目标需要是正整数"
+          }
+        }
+      }
+    },
+    "tasks.failure.endDateBeforeStartDate" : {
+      "comment" : "持续任务日期范围非法时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "截止日不能早于开始日"
+          }
+        }
+      }
+    },
+    "tasks.failure.focusDurationOutOfRange" : {
+      "comment" : "专注时长越界时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "专注时长为 5 至 120 分钟，并以 5 分钟为步长"
+          }
+        }
+      }
+    },
+    "tasks.failure.localDateChanged" : {
+      "comment" : "跨零点提交当日追加时的提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日期已变化，已刷新为今天的进度，请重新操作"
+          }
+        }
+      }
+    },
+    "tasks.failure.modeConfigurationMismatch" : {
+      "comment" : "模式与配置不匹配或缺少必填配置时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "任务配置不完整，请检查模式相关字段"
+          }
+        }
+      }
+    },
+    "tasks.failure.nameRequired" : {
+      "comment" : "任务名称为空时的字段错误，显示在名称输入框下方。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请填写任务名称"
+          }
+        }
+      }
+    },
+    "tasks.failure.notYetStarted" : {
+      "comment" : "持续任务未到计划开始日时的提示，%@ 是本地化日期。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该任务从 %@ 开始，暂时不能开始专注"
+          }
+        }
+      }
+    },
+    "tasks.failure.persistenceFailed" : {
+      "comment" : "本地读取、写入或事务提交失败时的通用提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本地数据操作失败，请重试"
+          }
+        }
+      }
+    },
+    "tasks.failure.startDateBeforeToday" : {
+      "comment" : "持续任务开始日早于本机今日时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始日不能早于今天"
+          }
+        }
+      }
+    },
+    "tasks.failure.taskHasHistory" : {
+      "comment" : "有历史会话的任务不允许删除时的提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已有专注记录的任务只能放弃"
+          }
+        }
+      }
+    },
+    "tasks.failure.taskLockedByTimer" : {
+      "comment" : "运行或暂停计时时对当前任务执行切换、完成、删除或放弃的提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "任务正在计时中，暂不可操作"
+          }
+        }
+      }
+    },
+    "tasks.failure.taskNotActive" : {
+      "comment" : "任务已是终态或状态已被其他操作改变时的提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "任务状态已变化，请刷新后重试"
+          }
+        }
+      }
+    },
+    "tasks.failure.taskUnavailable" : {
+      "comment" : "任务不存在或不属于当前账户时的统一提示，不透露具体原因。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "任务不可用"
+          }
+        }
+      }
+    },
+    "tasks.failure.todoTargetOutOfRange" : {
+      "comment" : "待办总目标非正整数时的字段错误。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目标番茄数需要是正整数"
+          }
+        }
+      }
+    },
+    "tasks.mode.ongoing" : {
+      "comment" : "持续任务模式的显示名称。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "持续"
+          }
+        }
+      }
+    },
+    "tasks.mode.todo" : {
+      "comment" : "待办任务模式的显示名称。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "待办"
+          }
+        }
+      }
+    },
+    "tasks.progress.daily" : {
+      "comment" : "持续任务今日进度，参数依次为已完成数和每日目标。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日 %1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "tasks.progress.todo" : {
+      "comment" : "待办任务进度，参数依次为已完成数和目标番茄数。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$lld/%2$lld 个番茄钟"
+          }
+        }
+      }
+    },
+    "tasks.progress.total" : {
+      "comment" : "没有每日目标的持续任务累计进度，参数是累计完成数。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "累计 %lld 个番茄钟"
+          }
+        }
+      }
+    },
+    "tasks.schedule.range" : {
+      "comment" : "持续任务计划周期，参数依次为已按用户地区格式化的开始和结束日期。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ 至 %2$@"
+          }
+        }
+      }
+    },
+    "tasks.start.availableHint" : {
+      "comment" : "开始专注按钮的旁白提示，说明点击后会立刻启动计时。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "立即选择该任务并启动计时"
+          }
+        }
+      }
+    },
+    "tasks.start.unavailableHint" : {
+      "comment" : "开始专注按钮禁用时的旁白提示。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该任务当前不可开始专注"
+          }
+        }
+      }
+    },
+    "tasks.status.abandoned" : {
+      "comment" : "已放弃任务状态的显示名称。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已放弃"
+          }
+        }
+      }
+    },
+    "tasks.status.active" : {
+      "comment" : "进行中任务状态的显示名称。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "进行中"
+          }
+        }
+      }
+    },
+    "tasks.status.completed" : {
+      "comment" : "已完成任务状态的显示名称。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已完成"
+          }
+        }
+      }
+    },
+    "tasks.status.filter.count" : {
+      "comment" : "任务状态筛选按钮，参数依次为本地化状态名和任务数量。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$lld"
+          }
+        }
+      }
+    },
+    "第 %lld 行" : {}
+  },
+  "version" : "1.0"
+}

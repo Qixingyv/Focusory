@@ -1,0 +1,4 @@
+{
+  "description": "Focusory 项目级 Codex hooks；检查脚本准备完成后再注册生命周期事件。",
+  "hooks": {}
+}

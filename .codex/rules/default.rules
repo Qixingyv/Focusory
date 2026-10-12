@@ -1,0 +1,12 @@
+# Focusory 命令审批规则。
+# 当项目命令逐渐稳定后，可以在这里添加 allow、prompt 或 forbidden 规则。
+
+prefix_rule(
+    pattern = ["python", "-m", "pytest"],
+    decision = "allow",
+    justification = "后端测试是开发过程中的常规安全操作。",
+    match = [
+        "python -m pytest",
+        "python -m pytest tests",
+    ],
+)

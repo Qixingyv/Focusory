@@ -1,0 +1,27 @@
+# macOS / Xcode 构建产物
+DerivedData/
+.build/
+*.xcuserstate
+xcuserdata/
+
+# 本地验证使用的派生数据目录
+Focusory/.derived-data/
+
+# 文档渲染临时目录
+.render-tmp/
+
+# macOS 与编辑器
+.DS_Store
+*.swp
+.obsidian/
+
+# Python 后端本地环境
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
