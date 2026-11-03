@@ -22,6 +22,7 @@
 | F00 | 04 | `foc-codex-f00-04-chore-isolate-backend-work` | 隔离Python后端工作基线 | [`F00-04-隔离Python后端工作基线.md`](./F00-04-隔离Python后端工作基线.md) | 已终止 |
 | F00 | 05 | `foc-codex-f00-05-chore-technical-workspace` | 建立技术工作分支 | [`F00-05-建立技术工作分支.md`](./F00-05-建立技术工作分支.md) | 已合并 |
 | F00 | 06 | `foc-codex-f00-06-chore-business-design-workspace` | 建立业务设计工作分支 | [`F00-06-建立业务设计工作分支.md`](./F00-06-建立业务设计工作分支.md) | 已合并 |
+| F00 | 07 | `foc-codex-f00-06-chore-business-design-workspace` | 配置GitHub远程并清理上传历史 | [`F00-07-配置GitHub远程并清理上传历史.md`](./F00-07-配置GitHub远程并清理上传历史.md) | 开发中 |
 | 不适用 | 不适用 | 建立规则前未记录 | 按页面与职责拆分 `FocusoryUI.swift` | [`SwiftUI页面文件拆分.md`](./SwiftUI页面文件拆分.md) | 已完成（历史记录） |
 
 状态统一使用：`待开发`、`开发中`、`待人工验收`、`已验收`、`已合并` 或 `已终止`。
@@ -113,7 +114,7 @@ F00-01 的注释整理已按用户要求停止继续实现，待 DeepSeek 接手
 
 不适用的文档项必须写明“不涉及”及原因，不得直接删除模板字段。
 
-当前索引只管理本地分支，不记录远程分支或 Pull Request。未来启用远程协作前，先更新根目录规则与 AI 开发流程。
+当前索引记录本地职责分支与任务；2026-11-03 起启用根规则指定的 origin，main 可在用户明确要求时推送。其他远程分支、标签和 Pull Request 仍须单独授权。
 
 ## 2026-11-03 工作区隔离
 
