@@ -25,3 +25,8 @@ __pycache__/
 .mypy_cache/
 .coverage
 htmlcov/
+
+# 个人资料与已停用的工具配置
+/计划/
+/文档/学习/
+/opencode.json
