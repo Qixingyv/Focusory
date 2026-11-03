@@ -1,8 +1,8 @@
 import Foundation
 
-/// 任务列表项；任务本体加从会话与每日进度推导的进度事实，不含本地化文案。
+/// 供任务卡片显示的任务和进度数据；不包含本地化文案。
 struct TaskListItem: Identifiable, Equatable, Sendable {
-    /// 任务本体。
+    /// 列表项对应的任务，提供名称、配置和整体状态。
     let task: FocusTask
     /// 累计完成番茄数。
     let completedPomodoroCount: Int
@@ -12,24 +12,24 @@ struct TaskListItem: Identifiable, Equatable, Sendable {
     let effectiveTarget: Int?
     /// 今日完成番茄数；持续任务开启每日目标时存在。
     let todayCompletedPomodoroCount: Int?
-    /// 目标反馈子状态。
+    /// 当前是否达标，供卡片显示反馈；不改变任务整体状态。
     let goalFeedback: TaskGoalFeedback
     /// 表示任务是否已有历史会话；决定可删除还是只能放弃。
     let hasHistory: Bool
     /// 表示任务当前是否可以开始新一轮专注。
     let isStartable: Bool
 
-    /// 列表项标识等于任务标识。
+    /// 沿用任务标识，让列表在刷新后仍能识别同一个任务。
     var id: UUID { task.id }
 }
 
 /// 任务页一次查询的完整结果；可重建，不保存本地化文案。
 struct TaskListSnapshot: Equatable, Sendable {
-    /// 本次查询的状态。
+    /// 本次查询使用的任务状态筛选条件。
     let status: FocusTaskStatus
-    /// 已按生命周期时刻排序的列表项。
+    /// 按创建、完成或放弃时刻倒序排列的任务，供页面直接显示。
     let items: [TaskListItem]
-    /// 三个整体状态的数量。
+    /// 当前账户在三个任务分类中的数量，供筛选栏显示。
     let counts: TaskStatusCounts
 }
 

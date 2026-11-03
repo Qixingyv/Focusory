@@ -1,25 +1,25 @@
 import Foundation
 @testable import Focusory
 
-/// 任务用例测试环境；一次装配内存存储、受控时间与全部端口桩。
+/// 为任务用例测试统一提供内存数据、可控时间和模拟计时服务。
 @MainActor
 final class TaskTestWorld {
     /// 测试基准本机日期。
     static let today = makeLocalDate("2026-10-11")
 
-    /// 当前账户标识。
+    /// 测试用例执行操作的账户。
     let ownerID = AccountID()
     /// 另一个账户标识，用于验证账户隔离。
     let otherOwnerID = AccountID()
-    /// 共享内存存储。
+    /// 仓储与事务共用的测试数据，供查询、写入和回滚验证。
     let store = InMemoryLocalStore()
-    /// 测试日历。
+    /// 固定时区的日历，让日期归属不受测试机器设置影响。
     let calendar = FixedCalendarProvider()
-    /// 可控时钟。
+    /// 测试可调整的当前时刻，用于模拟跨日等情况。
     let clock: FixedClock
-    /// 计时桩。
+    /// 模拟计时服务，供设置任务锁定状态并检查收到的专注配置。
     let timer = StubFocusTimerService()
-    /// 任务用例依赖。
+    /// 已连接测试实现的用例依赖，供测试直接执行任务操作。
     let environment: TaskUseCaseEnvironment
 
     /// 以基准日期零点装配测试环境。

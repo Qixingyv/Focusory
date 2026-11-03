@@ -1,23 +1,23 @@
 import Foundation
 
 /// 专注任务，承载待办或持续任务的配置、目标与生命周期。
-/// 所有可变字段都通过规则方法修改，`mode` 与终态不可恢复。
+/// 字段修改必须经过规则方法；模式创建后不变，已完成和已放弃不可恢复。
 struct FocusTask: Identifiable, Equatable, Sendable {
-    /// 任务标识。
+    /// 任务的稳定身份，编辑字段后保持不变。
     let id: UUID
-    /// 所属账户。
+    /// 数据所属的账户，用于隔离不同账户的数据。
     let ownerID: AccountID
     /// 任务名。
     private(set) var name: String
     /// 待办或持续；创建后不可转换。
     let mode: FocusTaskMode
-    /// 整体状态。
+    /// 任务属于进行中、已完成还是已放弃，决定允许的业务操作。
     private(set) var status: FocusTaskStatus
-    /// 完成来源；`auto` 由待办按计划完成标记，`manual` 与 `completed` 配套。
+    /// 区分待办自动达标和手动最终完成；未标记完成来源时为空。
     private(set) var completionSource: TaskCompletionSource?
-    /// 计划专注分钟数。
+    /// 每轮计划专注时长，单位为分钟。
     private(set) var focusDurationMinutes: Int
-    /// 计划休息分钟数。
+    /// 每轮计划休息时长，单位为分钟。
     private(set) var breakDurationMinutes: Int
     /// 待办总目标；持续任务为 nil。
     private(set) var todoTarget: Int?
@@ -29,15 +29,15 @@ struct FocusTask: Identifiable, Equatable, Sendable {
     private(set) var endDate: LocalDate?
     /// 是否启用每日目标。
     private(set) var hasDailyTarget: Bool
-    /// 每日基础目标。
+    /// 每天计划完成的番茄数，不含当日追加。
     private(set) var dailyTarget: Int?
-    /// 创建瞬时。
+    /// 创建时刻。
     let createdAt: Date
-    /// 最近更新瞬时。
+    /// 最近修改时刻。
     private(set) var updatedAt: Date
-    /// 手动最终完成瞬时。
+    /// 手动最终完成的时刻，用于已完成列表排序。
     private(set) var completedAt: Date?
-    /// 放弃瞬时。
+    /// 放弃任务的时刻，用于已放弃列表排序。
     private(set) var abandonedAt: Date?
     /// 服务端版本号；每次业务修改递增，用于增量同步与冲突检测。
     private(set) var version: Int
@@ -128,7 +128,7 @@ struct FocusTask: Identifiable, Equatable, Sendable {
         )
     }
 
-    /// 当前配置的规范化视图，用于编辑时比较开关与开始日是否变化。
+    /// 当前配置的独立表示，供编辑校验比较开关和开始日是否变化。
     var validatedConfiguration: ValidatedTaskConfiguration {
         ValidatedTaskConfiguration(
             name: name,
@@ -144,7 +144,7 @@ struct FocusTask: Identifiable, Equatable, Sendable {
         )
     }
 
-    /// 是否为可开始会话的进行中任务。
+    /// 是否处于进行中；开始专注时还需检查计划开始日。
     var isActive: Bool {
         status == .active
     }

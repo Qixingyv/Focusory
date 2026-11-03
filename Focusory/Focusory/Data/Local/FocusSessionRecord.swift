@@ -9,15 +9,15 @@ final class FocusSessionRecord {
 
     /// 会话标识。
     var id: UUID = UUID()
-    /// 所属账户标识。
+    /// 数据所属的账户，用于限定查询和写入范围。
     var ownerID: UUID = UUID()
     /// 关联任务标识。
     var taskID: UUID = UUID()
-    /// 完成时的任务名快照。
+    /// 会话完成时的任务名，保留历史名称以免被后续改名覆盖。
     var taskNameSnapshot: String = ""
-    /// 本轮开始瞬时。
+    /// 本轮专注开始的时刻。
     var startedAt: Date = Date()
-    /// 本轮结束瞬时。
+    /// 本轮专注结束的时刻，用于确定会话归属日期。
     var endedAt: Date = Date()
     /// 本轮计划专注秒数。
     var plannedDurationSeconds: Int = 0
@@ -25,9 +25,9 @@ final class FocusSessionRecord {
     var focusDurationSeconds: Int = 0
     /// 会话归属的本机日期键。
     var localDateKey: String = ""
-    /// 归属换算使用的 IANA 时区标识。
+    /// 会话归属日期使用的时区，供还原当时的日期判断。
     var timeZoneIdentifier: String = "GMT"
-    /// 创建瞬时。
+    /// 创建时刻。
     var createdAt: Date = Date()
     /// 服务端版本号。
     var version: Int = 1

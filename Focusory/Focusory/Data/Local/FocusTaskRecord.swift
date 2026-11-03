@@ -9,39 +9,39 @@ final class FocusTaskRecord {
 
     /// 任务标识。
     var id: UUID = UUID()
-    /// 所属账户标识。
+    /// 数据所属的账户，用于限定查询和写入范围。
     var ownerID: UUID = UUID()
     /// 任务名。
     var name: String = ""
-    /// 任务模式原始值。
+    /// 以字符串保存任务模式，读取时转换回领域枚举。
     var modeRawValue: String = FocusTaskMode.todo.rawValue
-    /// 整体状态原始值。
+    /// 以字符串保存任务状态，供存储查询和领域还原使用。
     var statusRawValue: String = FocusTaskStatus.active.rawValue
-    /// 完成来源原始值。
+    /// 以字符串保存完成来源；未记录时为空。
     var completionSourceRawValue: String?
-    /// 计划专注分钟数。
+    /// 每轮计划专注时长，单位为分钟。
     var focusDurationMinutes: Int = 25
-    /// 计划休息分钟数。
+    /// 每轮计划休息时长，单位为分钟。
     var breakDurationMinutes: Int = 5
     /// 待办总目标。
     var todoTarget: Int?
     /// 是否启用计划周期。
     var hasDateRange: Bool = false
-    /// 计划开始日本机日期键。
+    /// 以日期键保存计划开始日，不附带具体时刻。
     var startDateKey: String?
-    /// 计划截止日本机日期键。
+    /// 以日期键保存计划截止日，不附带具体时刻。
     var endDateKey: String?
     /// 是否启用每日目标。
     var hasDailyTarget: Bool = false
-    /// 每日基础目标。
+    /// 每天计划完成的番茄数，不含当日追加。
     var dailyTarget: Int?
-    /// 创建瞬时。
+    /// 创建时刻。
     var createdAt: Date = Date()
-    /// 最近更新瞬时。
+    /// 最近修改时刻。
     var updatedAt: Date = Date()
-    /// 手动完成瞬时。
+    /// 手动最终完成的时刻，用于已完成列表排序。
     var completedAt: Date?
-    /// 放弃瞬时。
+    /// 放弃任务的时刻，用于已放弃列表排序。
     var abandonedAt: Date?
     /// 服务端版本号。
     var version: Int = 1
@@ -76,7 +76,7 @@ final class FocusTaskRecord {
 }
 
 extension FocusTaskRecord {
-    /// 还原为领域对象；原始值非法时返回 nil，避免把损坏数据当成有效任务。
+    /// 供仓储读取的任务对象；模式或状态无法识别时返回 nil。
     var domainModel: FocusTask? {
         guard let mode = FocusTaskMode(rawValue: modeRawValue),
               let status = FocusTaskStatus(rawValue: statusRawValue) else {

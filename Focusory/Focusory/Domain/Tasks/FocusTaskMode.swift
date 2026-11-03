@@ -5,7 +5,7 @@ enum FocusTaskMode: String, CaseIterable, Identifiable, Sendable {
     case todo
     case ongoing
 
-    /// 枚举标识。
+    /// 以枚举值自身作为稳定标识，供界面区分各选项。
     var id: Self { self }
 }
 
@@ -15,7 +15,7 @@ enum FocusTaskStatus: String, CaseIterable, Identifiable, Sendable {
     case completed
     case abandoned
 
-    /// 枚举标识。
+    /// 以枚举值自身作为稳定标识，供界面区分各选项。
     var id: Self { self }
 }
 

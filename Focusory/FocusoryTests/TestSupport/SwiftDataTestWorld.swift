@@ -5,9 +5,9 @@ import SwiftData
 /// SwiftData 测试环境；使用独立的内存容器，不触碰开发者真实数据。
 @MainActor
 final class SwiftDataTestWorld {
-    /// 内存模型容器。
+    /// 当前测试独立使用的内存数据库，避免测试间共享数据。
     let container: ModelContainer
-    /// 与仓储共享的关闭自动保存的上下文。
+    /// 仓储和事务共用的上下文，关闭自动保存以验证实际提交行为。
     let context: ModelContext
 
     /// 创建内存容器与共享上下文。
@@ -16,33 +16,33 @@ final class SwiftDataTestWorld {
         context = FocusoryLocalStore.makeTransactionContext(in: container)
     }
 
-    /// 实时任务仓储。
+    /// 使用当前上下文读写任务，供准备数据和执行断言。
     var tasks: SwiftDataTaskRepository { SwiftDataTaskRepository(context: context) }
-    /// 会话查询仓储。
+    /// 读取当前上下文中的会话，供验证完成数和时长。
     var sessions: SwiftDataSessionRepository { SwiftDataSessionRepository(context: context) }
-    /// 每日进度仓储。
+    /// 使用当前上下文读写每日进度。
     var dailyProgress: SwiftDataDailyProgressRepository { SwiftDataDailyProgressRepository(context: context) }
-    /// 同步队列仓储。
+    /// 使用当前上下文读写待上传操作。
     var syncQueue: SwiftDataSyncQueueRepository { SwiftDataSyncQueueRepository(context: context) }
-    /// 本地事务执行器。
+    /// 提交或回滚当前上下文中的写入。
     var transaction: SwiftDataLocalTransaction { SwiftDataLocalTransaction(context: context) }
 
-    /// 用新的上下文重读，验证写入是否真正提交到存储。
+    /// 从新上下文读取任务，避免把尚未提交的数据误认为保存成功。
     var committedTasks: SwiftDataTaskRepository {
         SwiftDataTaskRepository(context: FocusoryLocalStore.makeTransactionContext(in: container))
     }
 
-    /// 用新的上下文重读同步队列，验证提交结果。
+    /// 从新上下文读取同步队列，验证操作是否真正保存。
     var committedSyncQueue: SwiftDataSyncQueueRepository {
         SwiftDataSyncQueueRepository(context: FocusoryLocalStore.makeTransactionContext(in: container))
     }
 
-    /// 用新的上下文重读每日进度，验证提交结果。
+    /// 从新上下文读取每日进度，验证进度是否真正保存。
     var committedDailyProgress: SwiftDataDailyProgressRepository {
         SwiftDataDailyProgressRepository(context: FocusoryLocalStore.makeTransactionContext(in: container))
     }
 
-    /// 构造一个已通过的待办任务。
+    /// 创建通过规则校验的待办任务，供持久化测试准备数据。
     func makeTodoTask(
         ownerID: AccountID,
         name: String = "持久化任务",

@@ -3,24 +3,24 @@ import SwiftUI
 
 /// 描述 Focusory 分段控件中一个可选项的值、文案与无障碍标识。
 struct FocusorySegmentedItem<Value: Hashable>: Identifiable {
-    /// 保存选项被选中时写入绑定的值。
+    /// 选中此项时交给调用方的值。
     let value: Value
     /// 选项的本地化文案。
     let title: LocalizedStringResource
-    /// 提供 UI 测试和辅助功能定位该选项的稳定标识。
+    /// UI 测试定位该选项的稳定标识。
     let accessibilityIdentifier: String
 
-    /// 选项标识，取绑定值。
+    /// 以选项值作为稳定标识，供 ForEach 区分各项。
     var id: Value { value }
 }
 
 /// 在一组互斥选项之间读取并更新当前选择的分段控件。
 struct FocusorySegmentedControl<Value: Hashable>: View {
-    /// 与调用方双向同步的当前选中值。
+    /// 当前选中值的绑定，点击选项时同步更新调用方状态。
     @Binding var selectedValue: Value
-    /// 定义控件按显示顺序呈现的可选项。
+    /// 按显示顺序排列的可选项。
     let items: [FocusorySegmentedItem<Value>]
-    /// 表示用户当前是否可以更改选中项。
+    /// 是否允许切换选项，控制按钮禁用状态和控件透明度。
     var isEnabled = true
 
     /// 将选项渲染为共享外框的一组互斥按钮。

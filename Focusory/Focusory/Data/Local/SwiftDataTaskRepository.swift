@@ -3,7 +3,7 @@ import SwiftData
 
 /// SwiftData 任务仓储；所有查询与写入都按 `ownerID` 限定账户范围。
 final class SwiftDataTaskRepository: TaskRepository {
-    /// 与其他仓储共享的本地上下文。
+    /// 仓储与事务共用的上下文，让相关写入一起提交或回滚。
     private let context: ModelContext
 
     /// 用指定上下文创建仓储。
@@ -12,7 +12,7 @@ final class SwiftDataTaskRepository: TaskRepository {
     }
 
     /// 返回账户内指定状态的任务。
-    /// - 失败：存储查询出错或存在无法还原的记录时抛 `TaskFailure(.persistenceFailed)`。
+    /// - 失败：查询错误原样抛出；模式或状态无法识别时抛 `TaskFailure(.persistenceFailed)`。
     func tasks(ownerID: AccountID, status: FocusTaskStatus) throws -> [FocusTask] {
         let owner = ownerID.rawValue
         let rawStatus = status.rawValue
@@ -42,7 +42,7 @@ final class SwiftDataTaskRepository: TaskRepository {
         )
     }
 
-    /// 保存任务；同一标识已存在时覆盖。
+    /// 暂存任务新增或更新，由事务统一保存到数据库。
     func upsert(_ task: FocusTask) throws {
         if let record = try record(id: task.id, ownerID: task.ownerID) {
             record.apply(task)
@@ -51,7 +51,7 @@ final class SwiftDataTaskRepository: TaskRepository {
         }
     }
 
-    /// 删除任务。
+    /// 暂存指定账户内的任务删除，由事务统一保存。
     func delete(id: UUID, ownerID: AccountID) throws {
         guard let record = try record(id: id, ownerID: ownerID) else { return }
         context.delete(record)

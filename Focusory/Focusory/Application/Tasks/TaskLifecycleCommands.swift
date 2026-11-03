@@ -2,7 +2,7 @@ import Foundation
 
 /// 创建当前账户的任务，并与待同步变更一起原子提交。
 struct CreateTaskCommand {
-    /// 用例依赖。
+    /// 任务操作使用的仓储、事务、账户和时间等能力，由应用入口提供。
     let environment: TaskUseCaseEnvironment
 
     /// 校验草稿并保存进行中任务。
@@ -29,7 +29,7 @@ struct CreateTaskCommand {
 
 /// 编辑当前账户任务的允许字段；模式与已产生会话后的配置开关不可改。
 struct UpdateTaskCommand {
-    /// 用例依赖。
+    /// 任务操作使用的仓储、事务、账户和时间等能力，由应用入口提供。
     let environment: TaskUseCaseEnvironment
 
     /// 校验草稿并保存任务；本地提交失败时任务与队列一起回滚。
@@ -58,7 +58,7 @@ struct UpdateTaskCommand {
 
 /// 手动最终完成当前账户的任务；进入不可恢复的终态。
 struct CompleteTaskCommand {
-    /// 用例依赖。
+    /// 任务操作使用的仓储、事务、账户和时间等能力，由应用入口提供。
     let environment: TaskUseCaseEnvironment
 
     /// 完成指定任务；正被计时锁定或已是终态时抛出业务错误。
@@ -85,7 +85,7 @@ struct CompleteTaskCommand {
 
 /// 放弃当前账户的任务；保留历史会话与统计。
 struct AbandonTaskCommand {
-    /// 用例依赖。
+    /// 任务操作使用的仓储、事务、账户和时间等能力，由应用入口提供。
     let environment: TaskUseCaseEnvironment
 
     /// 放弃指定任务；正被计时锁定或已是终态时抛出业务错误。
@@ -112,7 +112,7 @@ struct AbandonTaskCommand {
 
 /// 删除没有历史会话的进行中任务，并留下幂等的删除变更。
 struct DeleteTaskCommand {
-    /// 用例依赖。
+    /// 任务操作使用的仓储、事务、账户和时间等能力，由应用入口提供。
     let environment: TaskUseCaseEnvironment
 
     /// 删除指定任务。

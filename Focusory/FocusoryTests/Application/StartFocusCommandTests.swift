@@ -6,7 +6,7 @@ import Testing
 @MainActor
 @Suite("开始专注用例")
 struct StartFocusCommandTests {
-    /// 进行中任务会把手交接给计时端口并固化本轮配置。
+    /// 进行中任务会向计时服务交接固定的本轮配置。
     @Test func handsOffFrozenRunConfiguration() throws {
         let world = TaskTestWorld()
         let task = try world.seedTask(

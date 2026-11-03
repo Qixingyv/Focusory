@@ -1,7 +1,9 @@
 {
   "sourceLanguage" : "zh-Hans",
   "strings" : {
-    "" : {},
+    "" : {
+
+    },
     "account.action.signOut" : {
       "comment" : "账户区域中的退出登录操作。",
       "extractionState" : "manual",
@@ -94,6 +96,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "确认"
+          }
+        }
+      }
+    },
+    "common.stepper.decrease" : {
+      "comment" : "数字步进器减号按钮的无障碍名称。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "减少数值"
+          }
+        }
+      }
+    },
+    "common.stepper.increase" : {
+      "comment" : "数字步进器加号按钮的无障碍名称。",
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "增加数值"
           }
         }
       }
@@ -1081,8 +1107,7 @@
           }
         }
       }
-    },
-    "第 %lld 行" : {}
+    }
   },
   "version" : "1.0"
 }

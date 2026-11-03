@@ -3,7 +3,7 @@ import SwiftData
 
 /// SwiftData 本地事务适配；闭包内的写入在结束时一次提交，失败时整体回滚。
 final class SwiftDataLocalTransaction: LocalTransaction {
-    /// 与仓储共享的本地上下文。
+    /// 与仓储共用的上下文，统一提交或回滚仓储暂存的写入。
     private let context: ModelContext
 
     /// 用指定上下文创建事务执行器。

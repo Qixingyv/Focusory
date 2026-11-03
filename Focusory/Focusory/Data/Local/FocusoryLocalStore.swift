@@ -1,9 +1,9 @@
 import Foundation
 import SwiftData
 
-/// 本地持久化 schema 与容器工厂。
+/// 定义本地保存的数据类型，并创建存储容器和事务上下文。
 enum FocusoryLocalStore {
-    /// 当前 schema 包含的实体。
+    /// 本地数据库要保存的模型类型，供创建容器时注册。
     static let models: [any PersistentModel.Type] = [
         FocusTaskRecord.self,
         TaskDailyProgressRecord.self,

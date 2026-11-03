@@ -21,7 +21,7 @@ struct AppTabSidebarHeader: View {
 
 /// 在系统标签侧边栏底部工具栏显示本地账户信息和退出入口。
 struct AppTabSidebarBottomBar: View {
-    /// 表示用户是否正在确认退出账户操作。
+    /// 控制退出账户确认提示的显示与关闭。
     @State private var isShowingSignOutConfirmation = false
 
     /// 组合本地账户身份、退出操作和确认提示。

@@ -1,6 +1,6 @@
 import Foundation
 
-/// 任务页一次性提示；界面在页头弱化显示，不使用阻断弹窗。
+/// 任务页一次性提示；界面在页面顶部弱化显示，不使用阻断弹窗。
 enum TaskNotice: Equatable, Sendable {
     /// 命令失败原因。
     case failure(TaskFailure)
@@ -8,35 +8,35 @@ enum TaskNotice: Equatable, Sendable {
     case notYetStarted(LocalDate)
 }
 
-/// 任务页面的界面状态：筛选、列表快照、加载结果与最近一次命令结果。
+/// 保存任务列表状态，处理页面操作并调用业务用例。
 @Observable
 final class TaskListModel {
-    /// 任务用例依赖。
+    /// 执行任务查询和修改所需的业务能力，由上层传入。
     private let environment: TaskUseCaseEnvironment
-    /// 当前分段筛选。
+    /// 当前显示哪类任务，决定列表查询和筛选项的选中状态。
     var selectedStatus: FocusTaskStatus = .active
-    /// 最近一次成功加载的列表快照；为空表示还没有成功加载过。
+    /// 最近一次查询成功的任务和计数；查询失败时保留，首次成功前为空。
     private(set) var snapshot: TaskListSnapshot?
-    /// 表示列表是否正在加载。
+    /// 记录任务查询是否正在执行。
     private(set) var isLoading = false
-    /// 列表加载失败原因；非空时界面显示可重试错误而不是空状态。
+    /// 列表查询的失败原因；非空时显示重试界面，避免误显示为没有任务。
     private(set) var loadFailure: TaskFailure?
-    /// 最近一次命令的一次性提示。
+    /// 页面顶部要显示的操作提示；为空时隐藏提示条。
     private(set) var notice: TaskNotice?
-    /// 当前被选中作为专注对象的任务标识。
+    /// 当前选中用于专注的任务，供列表突出显示。
     private(set) var selectedTaskID: UUID?
 
-    /// 用任务用例依赖创建界面状态。
+    /// 接收任务用例依赖，供后续查询和操作使用。
     init(environment: TaskUseCaseEnvironment) {
         self.environment = environment
     }
 
-    /// 当前可见的列表项；尚未加载成功时为空。
+    /// 最近一次成功查询的列表项，供页面显示；尚未查询成功时为空。
     var items: [TaskListItem] {
         snapshot?.items ?? []
     }
 
-    /// 三个整体状态的当前计数；尚未加载成功时全部为 0。
+    /// 进行中、已完成和已放弃的任务数，供筛选栏显示；首次查询成功前为 0。
     var counts: TaskStatusCounts {
         snapshot?.counts ?? TaskStatusCounts(active: 0, completed: 0, abandoned: 0)
     }
@@ -70,7 +70,7 @@ final class TaskListModel {
         notice = nil
     }
 
-    /// 在页头显示一次性提示。
+    /// 设置要在页面顶部显示的一次性提示。
     func showNotice(_ notice: TaskNotice) {
         self.notice = notice
     }
@@ -172,7 +172,7 @@ final class TaskListModel {
         items.first { $0.id == id }
     }
 
-    /// 执行一个不返回结果的命令，并在失败时记录提示。
+    /// 执行操作后刷新列表；操作失败时在页面顶部显示原因。
     private func run(_ work: () throws -> Void) {
         do {
             try work()
@@ -182,7 +182,7 @@ final class TaskListModel {
         }
     }
 
-    /// 把任意错误收敛为稳定任务失败结果。
+    /// 保留业务错误，将其他错误统一转为持久化失败。
     private func asTaskFailure(_ error: Error) -> TaskFailure {
         (error as? TaskFailure) ?? TaskFailure(.persistenceFailed)
     }

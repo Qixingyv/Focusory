@@ -3,17 +3,17 @@ import SwiftUI
 
 /// 显示按状态筛选的任务列表，并承载任务创建、编辑与目标追加入口的页面。
 struct TaskScreen: View {
-    /// 任务页界面状态。
+    /// 上层保存的任务列表模型，提供页面数据和任务操作。
     let model: TaskListModel
-    /// 在用户从任务行开始专注后请求上层切换到专注页。
+    /// 开始专注成功后通知上层切换页面，任务页不直接控制根导航。
     let onStartFocus: () -> Void
 
-    /// 保存当前交给编辑弹窗的列表项，空值表示未编辑现有任务。
+    /// 当前交给编辑弹窗的任务；为空时关闭该弹窗。
     @State private var taskBeingEdited: TaskListItem?
-    /// 表示新建任务编辑弹窗是否正在显示。
+    /// 控制新建任务弹窗的显示与关闭。
     @State private var isNewTaskEditorPresented = false
 
-    /// 根据筛选结果显示工具栏、提示、加载错误、空状态或任务列表。
+    /// 显示任务列表与操作入口，并响应新建和编辑弹窗状态。
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             taskToolbar
@@ -85,7 +85,7 @@ struct TaskScreen: View {
         }
     }
 
-    /// 在页头弱化显示一次性提示，不打断列表交互。
+    /// 在页面顶部弱化显示一次性提示，不打断列表交互。
     private func noticeBanner(_ notice: TaskNotice) -> some View {
         HStack(spacing: 8) {
             Image(systemName: "info.circle")
@@ -119,7 +119,7 @@ struct TaskScreen: View {
         .accessibilityIdentifier("task-notice")
     }
 
-    /// 按加载状态在错误、空状态和任务列表之间选择。
+    /// 列表主体：查询失败时显示重试，没有结果时显示空状态，否则显示任务。
     @ViewBuilder
     private var content: some View {
         if let loadFailure = model.loadFailure {
@@ -214,7 +214,7 @@ struct TaskScreen: View {
         .accessibilityIdentifier("task-empty-state")
     }
 
-    /// 按查询顺序显示当前可见任务及其交互回调。
+    /// 任务卡片列表，将卡片操作交给模型或编辑弹窗处理。
     private var taskList: some View {
         ScrollView {
             LazyVStack(spacing: model.selectedStatus == .active ? 10 : 8) {
@@ -241,7 +241,7 @@ struct TaskScreen: View {
         .scrollIndicators(.hidden)
     }
 
-    /// 按任务模式把追加数量交给对应命令，并在页头提示失败原因。
+    /// 按任务模式把追加数量交给对应命令，并在页面顶部提示失败原因。
     private func appendTarget(for item: TaskListItem, quantity: Int) {
         let failure: TaskFailure?
         switch item.task.mode {
@@ -255,7 +255,7 @@ struct TaskScreen: View {
         }
     }
 
-    /// 返回与当前任务状态匹配的空状态图标。
+    /// 当前筛选分类没有任务时显示的图标。
     private var emptyStateSymbol: String {
         switch model.selectedStatus {
         case .active: "checklist"
@@ -264,7 +264,7 @@ struct TaskScreen: View {
         }
     }
 
-    /// 返回与当前任务状态匹配的空状态标题。
+    /// 当前筛选分类没有任务时显示的标题。
     private var emptyStateTitle: LocalizedStringResource {
         switch model.selectedStatus {
         case .active: .tasksEmptyActiveTitle
@@ -273,7 +273,7 @@ struct TaskScreen: View {
         }
     }
 
-    /// 返回与当前任务状态匹配的空状态说明。
+    /// 当前筛选分类没有任务时显示的说明。
     private var emptyStateDescription: LocalizedStringResource {
         switch model.selectedStatus {
         case .active: .tasksEmptyActiveDescription
@@ -282,12 +282,12 @@ struct TaskScreen: View {
         }
     }
 
-    /// 返回空状态图标用于区分活动与历史分类的颜色。
+    /// 空状态图标颜色，用于区分进行中与历史任务分类。
     private var emptyStateIconColor: Color {
         model.selectedStatus == .active ? .focusoryAccent : .focusoryTextQuaternary
     }
 
-    /// 返回空状态图标容器的背景色。
+    /// 空状态图标的背景色。
     private var emptyStateIconBackground: Color {
         model.selectedStatus == .active ? .focusoryAccentSurface : .focusoryPageBackground
     }
@@ -297,9 +297,9 @@ struct TaskScreen: View {
     TaskScreenPreview()
 }
 
-/// 使用内存存储渲染任务页预览的包装视图。
+/// 为任务页预览创建内存存储，避免使用真实数据。
 private struct TaskScreenPreview: View {
-    /// 内存依赖；创建失败时只显示占位文本。
+    /// 预览专用的任务用例依赖；创建失败时为空，显示占位文本。
     private let environment: TaskUseCaseEnvironment?
 
     /// 创建预览并尝试装配内存依赖。

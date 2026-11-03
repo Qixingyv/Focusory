@@ -1,14 +1,14 @@
 import Foundation
 
-/// 已通过校验的任务配置；只能由 `TaskConfigurationValidator` 产出。
+/// 表示校验通过的任务配置，供创建和编辑任务使用。
 struct ValidatedTaskConfiguration: Equatable, Sendable {
-    /// 规范化后的任务名。
+    /// 去除首尾空白后的任务名。
     let name: String
-    /// 任务模式。
+    /// 校验本次配置使用的待办或持续模式。
     let mode: FocusTaskMode
-    /// 计划专注分钟数。
+    /// 每轮计划专注时长，单位为分钟。
     let focusDurationMinutes: Int
-    /// 计划休息分钟数。
+    /// 每轮计划休息时长，单位为分钟。
     let breakDurationMinutes: Int
     /// 待办总目标；持续任务为 nil。
     let todoTarget: Int?
@@ -20,7 +20,7 @@ struct ValidatedTaskConfiguration: Equatable, Sendable {
     let endDate: LocalDate?
     /// 是否启用每日目标。
     let hasDailyTarget: Bool
-    /// 每日基础目标。
+    /// 每天计划完成的番茄数，不含当日追加。
     let dailyTarget: Int?
 }
 

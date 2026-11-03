@@ -9,15 +9,15 @@ final class TaskDailyProgressRecord {
 
     /// 每日进度标识。
     var id: UUID = UUID()
-    /// 所属账户标识。
+    /// 数据所属的账户，用于限定查询和写入范围。
     var ownerID: UUID = UUID()
     /// 关联任务标识。
     var taskID: UUID = UUID()
-    /// 归属的本机日期键。
+    /// 进度归属的本机日期键，与任务标识共同确定唯一记录。
     var localDateKey: String = ""
     /// 建立快照时的 IANA 时区标识。
     var timeZoneIdentifier: String = "GMT"
-    /// 当日目标快照。
+    /// 当天建立进度时固定的基础目标，不随任务后续编辑变化。
     var targetSnapshot: Int = 1
     /// 当日追加数量。
     var addedTargetCount: Int = 0
@@ -25,9 +25,9 @@ final class TaskDailyProgressRecord {
     var completedPomodoroCount: Int = 0
     /// 当日实际专注秒数。
     var focusDurationSeconds: Int = 0
-    /// 创建瞬时。
+    /// 创建时刻。
     var createdAt: Date = Date()
-    /// 最近更新瞬时。
+    /// 最近修改时刻。
     var updatedAt: Date = Date()
     /// 服务端版本号。
     var version: Int = 1
@@ -55,7 +55,7 @@ final class TaskDailyProgressRecord {
 }
 
 extension TaskDailyProgressRecord {
-    /// 还原为领域对象；日期键或时区非法时返回 nil。
+    /// 供仓储读取的每日进度；日期键或时区非法时返回 nil。
     var domainModel: TaskDailyProgress? {
         guard let localDate = LocalDate(key: localDateKey),
               let timeZoneID = TimeZoneID(timeZoneIdentifier) else {

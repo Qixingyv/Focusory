@@ -6,10 +6,10 @@ enum AppDestination: String, CaseIterable, Identifiable {
     case focus
     case statistics
 
-    /// 枚举标识。
+    /// 以导航项自身作为稳定标识，供 ForEach 区分各页面。
     var id: Self { self }
 
-    /// 页头本地化标题。
+    /// 导航项和页头共同显示的本地化标题。
     var title: LocalizedStringResource {
         switch self {
         case .tasks: .navigationTasksTitle
@@ -18,7 +18,7 @@ enum AppDestination: String, CaseIterable, Identifiable {
         }
     }
 
-    /// 页头本地化说明。
+    /// 页头中标题下方的本地化说明。
     var subtitle: LocalizedStringResource {
         switch self {
         case .tasks: .navigationTasksSubtitle
@@ -27,7 +27,7 @@ enum AppDestination: String, CaseIterable, Identifiable {
         }
     }
 
-    /// 侧边栏 SF Symbol 名称。
+    /// 侧边栏导航图标使用的 SF Symbol 名称。
     var symbolName: String {
         switch self {
         case .tasks: "checklist"

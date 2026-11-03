@@ -5,11 +5,11 @@ import Foundation
 struct TaskDailyProgress: Identifiable, Equatable, Sendable {
     /// 每日进度标识。
     let id: UUID
-    /// 所属账户。
+    /// 数据所属的账户，用于隔离不同账户的数据。
     let ownerID: AccountID
     /// 关联的持续任务。
     let taskID: UUID
-    /// 这条快照归属的本机日期。
+    /// 这条进度归属的本机日期，用于区分同一任务不同天的投入。
     let localDate: LocalDate
     /// 建立快照时的 IANA 时区。
     let timeZoneID: TimeZoneID
@@ -21,14 +21,14 @@ struct TaskDailyProgress: Identifiable, Equatable, Sendable {
     private(set) var completedPomodoroCount: Int
     /// 当日实际专注秒数。
     private(set) var focusDurationSeconds: Int
-    /// 创建瞬时。
+    /// 创建时刻。
     let createdAt: Date
-    /// 最近更新瞬时。
+    /// 最近修改时刻。
     private(set) var updatedAt: Date
-    /// 实体版本号。
+    /// 每次进度修改递增的版本，用于识别数据变化。
     private(set) var version: Int
 
-    /// 当日有效目标。
+    /// 当日基础目标快照加追加数量，用于判断是否达标。
     var effectiveTarget: Int {
         targetSnapshot + addedTargetCount
     }

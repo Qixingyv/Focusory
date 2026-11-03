@@ -2,7 +2,7 @@ import Foundation
 
 /// 待办按计划完成后追加总目标；只修改目标与待同步变更。
 struct AppendTodoTargetCommand {
-    /// 用例依赖。
+    /// 追加目标所需的仓储、事务、账户和时间等能力。
     let environment: TaskUseCaseEnvironment
 
     /// 追加待办总目标。
@@ -56,7 +56,7 @@ struct AppendTodoTargetCommand {
 
 /// 持续任务今日达标后追加当日目标；只修改当前本机日期的当日追加数。
 struct AppendDailyTargetCommand {
-    /// 用例依赖。
+    /// 追加目标所需的仓储、事务、账户和时间等能力。
     let environment: TaskUseCaseEnvironment
 
     /// 追加当日目标。

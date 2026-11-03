@@ -35,9 +35,9 @@ enum TaskFailureCode: String, Equatable, Sendable {
 
 /// 字段化的任务失败结果；调用方按 `code` 分支，按 `field` 定位输入项。
 struct TaskFailure: Error, Equatable, Sendable {
-    /// 稳定失败码。
+    /// 供调用方判断失败类型、供界面选择提示文案的稳定错误码。
     let code: TaskFailureCode
-    /// 表单校验失败时对应的字段；命令失败时为 nil。
+    /// 应显示错误的表单字段；为空时由界面显示整体提示。
     let field: TaskFormField?
 
     /// 创建任务失败结果。

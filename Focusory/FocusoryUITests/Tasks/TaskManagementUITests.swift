@@ -85,6 +85,59 @@ final class TaskManagementUITests: XCTestCase {
         XCTAssertTrue(app.groups["task-empty-state"].waitForExistence(timeout: 3))
     }
 
+    /// 持续任务启用计划周期和每日目标后可以保存。
+    @MainActor
+    func testCreatesOngoingTaskWithDateRangeAndDailyTarget() throws {
+        let app = XCUIApplication.launchWithCleanStore()
+        app.buttons["task-create-button"].firstMatch.click()
+
+        let nameField = app.textFields["task-name-field"]
+        XCTAssertTrue(nameField.waitForExistence(timeout: 2))
+        nameField.click()
+        nameField.typeText("持续任务")
+
+        app.buttons["task-mode-ongoing"].click()
+        let dateRangeToggle = app.descendants(matching: .any)["task-date-range-toggle"]
+        XCTAssertTrue(dateRangeToggle.waitForExistence(timeout: 2))
+        dateRangeToggle.click()
+        app.descendants(matching: .any)["task-daily-target-toggle"].click()
+
+        app.buttons["task-editor-save-button"].click()
+        XCTAssertTrue(app.staticTexts["持续任务"].waitForExistence(timeout: 3))
+    }
+
+    /// 专注时长步进器的加减按钮在按钮边缘也能点击，并立即更新数值。
+    @MainActor
+    func testFocusDurationStepperRespondsAtButtonEdge() throws {
+        let app = XCUIApplication.launchWithCleanStore()
+        app.buttons["task-create-button"].firstMatch.click()
+
+        let increment = app.buttons["task-focus-duration-stepper-increment"]
+        XCTAssertTrue(increment.waitForExistence(timeout: 2))
+        XCTAssertGreaterThanOrEqual(increment.frame.width, 34)
+        XCTAssertGreaterThanOrEqual(increment.frame.height, 34)
+
+        let value = app.staticTexts["task-focus-duration-stepper-value"]
+        XCTAssertTrue(value.waitForExistence(timeout: 2))
+        XCTAssertEqual(value.value as? String, "25")
+
+        increment.coordinate(withNormalizedOffset: CGVector(dx: 0.85, dy: 0.85)).click()
+        waitForValue("30", in: value)
+
+        let decrement = app.buttons["task-focus-duration-stepper-decrement"]
+        decrement.coordinate(withNormalizedOffset: CGVector(dx: 0.15, dy: 0.15)).click()
+        waitForValue("25", in: value)
+
+        app.buttons["task-editor-cancel-button"].click()
+    }
+
+    /// 等待步进器数值在界面上更新。
+    private func waitForValue(_ expectedValue: String, in element: XCUIElement) {
+        let predicate = NSPredicate(format: "value == %@", expectedValue)
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: element)
+        XCTAssertEqual(XCTWaiter.wait(for: [expectation], timeout: 2), .completed)
+    }
+
     /// 通过新建任务弹窗创建任务并等待卡片出现。
     private func createTask(in app: XCUIApplication, name: String) {
         app.buttons["task-create-button"].firstMatch.click()

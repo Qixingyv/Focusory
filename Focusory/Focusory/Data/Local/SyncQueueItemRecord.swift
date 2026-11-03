@@ -9,27 +9,27 @@ final class SyncQueueItemRecord {
 
     /// 幂等操作标识。
     var operationID: UUID = UUID()
-    /// 所属账户标识。
+    /// 数据所属的账户，用于限定查询和写入范围。
     var ownerID: UUID = UUID()
-    /// 实体类型原始值。
+    /// 以字符串保存变更对象的类型，供上传时选择对应数据。
     var entityTypeRawValue: String = SyncEntityType.task.rawValue
-    /// 实体标识。
+    /// 发生变更的业务对象标识，供上传时查找数据。
     var entityID: UUID = UUID()
-    /// 操作类型原始值。
+    /// 以字符串保存创建、更新、删除或追加目标等操作类型。
     var operationTypeRawValue: String = SyncOperationType.updated.rawValue
-    /// 负载 schema 版本。
+    /// 同步数据的格式版本，供上传时选择对应格式。
     var payloadSchemaVersion: Int = SyncQueueItem.currentPayloadSchemaVersion
-    /// 同步状态原始值。
+    /// 以字符串保存当前上传状态。
     var statusRawValue: String = SyncQueueStatus.pending.rawValue
-    /// 已尝试上传次数。
+    /// 已尝试上传的次数，供重试策略使用。
     var attemptCount: Int = 0
-    /// 下次可尝试瞬时。
+    /// 下次允许重试上传的时刻；为空表示未设置。
     var nextAttemptAt: Date?
-    /// 最近失败码。
+    /// 最近一次上传失败的错误码；尚未记录失败时为空。
     var lastErrorCode: String?
-    /// 入队瞬时。
+    /// 加入同步队列的时刻。
     var createdAt: Date = Date()
-    /// 最近更新瞬时。
+    /// 最近修改时刻。
     var updatedAt: Date = Date()
 
     /// 以领域对象创建实体。
@@ -50,7 +50,7 @@ final class SyncQueueItemRecord {
 }
 
 extension SyncQueueItemRecord {
-    /// 还原为领域对象；原始值非法时返回 nil。
+    /// 供仓储读取的队列项；类型、操作或状态无法识别时返回 nil。
     var domainModel: SyncQueueItem? {
         guard let entityType = SyncEntityType(rawValue: entityTypeRawValue),
               let operationType = SyncOperationType(rawValue: operationTypeRawValue),

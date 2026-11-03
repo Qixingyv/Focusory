@@ -93,7 +93,7 @@ struct SwiftDataTaskRepositoryTests {
         #expect(counts.total == 3)
     }
 
-    /// 删除后任务不再存在，其他账户的同标识任务不受影响。
+    /// 其他账户不能删除该任务，所属账户删除后任务不再存在。
     @Test func deletesTaskForOwningAccountOnly() throws {
         let world = try SwiftDataTestWorld()
         let ownerID = AccountID()

@@ -3,7 +3,7 @@ import SwiftData
 
 /// SwiftData 会话查询仓储；只读取已保存会话，不创建会话。
 final class SwiftDataSessionRepository: SessionRepository {
-    /// 与其他仓储共享的本地上下文。
+    /// 与任务仓储共用的上下文，读取同一次业务操作中的会话数据。
     private let context: ModelContext
 
     /// 用指定上下文创建仓储。
@@ -34,7 +34,7 @@ final class SwiftDataSessionRepository: SessionRepository {
 
 /// SwiftData 每日进度仓储；同一任务与本机日期唯一。
 final class SwiftDataDailyProgressRepository: DailyProgressRepository {
-    /// 与其他仓储共享的本地上下文。
+    /// 仓储与事务共用的上下文，让相关写入一起提交或回滚。
     private let context: ModelContext
 
     /// 用指定上下文创建仓储。
@@ -47,7 +47,7 @@ final class SwiftDataDailyProgressRepository: DailyProgressRepository {
         try record(taskID: taskID, ownerID: ownerID, localDate: localDate)?.domainModel
     }
 
-    /// 保存每日进度；同一任务与日期已存在时覆盖。
+    /// 暂存每日进度，同一任务与日期已存在时更新；由事务统一保存。
     func upsert(_ progress: TaskDailyProgress) throws {
         if let record = try record(
             taskID: progress.taskID,
@@ -79,7 +79,7 @@ final class SwiftDataDailyProgressRepository: DailyProgressRepository {
 
 /// SwiftData 同步队列仓储；入队不覆盖已有操作标识。
 final class SwiftDataSyncQueueRepository: SyncQueueRepository {
-    /// 与其他仓储共享的本地上下文。
+    /// 仓储与事务共用的上下文，让相关写入一起提交或回滚。
     private let context: ModelContext
 
     /// 用指定上下文创建仓储。

@@ -6,9 +6,9 @@ struct TaskDraft: Equatable, Sendable {
     var name: String
     /// 待办或持续；编辑时不得改变已有任务的模式。
     var mode: FocusTaskMode
-    /// 计划专注分钟数。
+    /// 每轮计划专注时长，单位为分钟。
     var focusDurationMinutes: Int
-    /// 计划休息分钟数。
+    /// 每轮计划休息时长，单位为分钟。
     var breakDurationMinutes: Int
     /// 待办总目标；持续任务必须为 nil。
     var todoTarget: Int?
@@ -23,7 +23,7 @@ struct TaskDraft: Equatable, Sendable {
     /// 每日基础目标；仅启用每日目标时存在。
     var dailyTarget: Int?
 
-    /// 创建一份合法默认值的待办草稿。
+    /// 创建表单草稿；默认使用待办配置，名称等内容仍须通过校验。
     init(
         name: String = "",
         mode: FocusTaskMode = .todo,
@@ -48,7 +48,7 @@ struct TaskDraft: Equatable, Sendable {
         self.dailyTarget = dailyTarget
     }
 
-    /// 返回移除首尾空白与换行后的任务名。
+    /// 去除首尾空白和换行后的名称，供必填校验和保存使用。
     var trimmedName: String {
         name.trimmingCharacters(in: .whitespacesAndNewlines)
     }

@@ -1,5 +1,6 @@
 import XCTest
 
+/// 在不同界面配置下启动应用并保留初始界面截图。
 final class FocusoryUITestsLaunchTests: XCTestCase {
 
     /// 让启动截图覆盖每种目标应用 UI 配置。

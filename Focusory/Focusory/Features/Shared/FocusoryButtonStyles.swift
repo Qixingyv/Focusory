@@ -3,19 +3,19 @@ import SwiftUI
 
 /// 用于主操作的可配置填充按钮样式。
 struct FocusoryFilledButtonStyle: ButtonStyle {
-    /// 定义按钮默认状态的填充颜色。
+    /// 按钮默认背景色。
     let color: Color
-    /// 定义指针悬停时的按钮填充颜色。
+    /// 按钮悬停时的背景色。
     let hoverColor: Color
-    /// 定义按钮按下时的填充颜色。
+    /// 按钮按下时的背景色。
     let pressedColor: Color
-    /// 控制按钮文案两侧的水平留白。
+    /// 按钮内容两侧的留白。
     var horizontalPadding: CGFloat = 32
-    /// 限制按钮可点击区域的最小高度。
+    /// 按钮点击区域的最小高度。
     var minHeight: CGFloat = 36
-    /// 定义按钮背景边界的圆角半径。
+    /// 按钮背景的圆角半径。
     var cornerRadius: CGFloat = 12
-    /// 定义按钮标签使用的语义字体。
+    /// 按钮标签使用的字体。
     var font: Font = FocusoryTypography.bodyEmphasized
 
     /// 根据按压状态构建填充按钮的可视内容。
@@ -36,28 +36,28 @@ struct FocusoryFilledButtonStyle: ButtonStyle {
 
 /// 呈现填充按钮在默认、悬停、按压和禁用状态下外观的内部视图。
 private struct FocusoryFilledButtonBody<Label: View>: View {
-    /// 保存由按钮调用方提供的标签内容。
+    /// 调用方提供的按钮文字或图标。
     let label: Label
-    /// 表示按钮当前是否正处于按压状态。
+    /// 按钮是否正在按下，决定按压外观。
     let isPressed: Bool
-    /// 保存按钮默认状态的填充颜色。
+    /// 按钮默认背景色。
     let color: Color
-    /// 保存指针悬停时的按钮填充颜色。
+    /// 按钮悬停时的背景色。
     let hoverColor: Color
-    /// 保存按钮按下时的填充颜色。
+    /// 按钮按下时的背景色。
     let pressedColor: Color
-    /// 保存按钮标签两侧的水平留白。
+    /// 按钮内容两侧的留白。
     let horizontalPadding: CGFloat
-    /// 保存按钮可点击区域的最小高度。
+    /// 按钮点击区域的最小高度。
     let minHeight: CGFloat
-    /// 保存按钮背景边界的圆角半径。
+    /// 按钮背景的圆角半径。
     let cornerRadius: CGFloat
-    /// 保存按钮标签使用的语义字体。
+    /// 按钮标签使用的字体。
     let font: Font
 
-    /// 反映 SwiftUI 环境中该按钮是否允许交互。
+    /// 系统传入的启用状态，决定按钮的禁用外观。
     @Environment(\.isEnabled) private var isEnabled
-    /// 记录指针当前是否位于按钮交互区域内。
+    /// 指针是否停留在按钮内，决定悬停外观。
     @State private var isHovering = false
 
     /// 根据启用、悬停和按压状态渲染填充按钮。
@@ -85,9 +85,9 @@ private struct FocusoryFilledButtonBody<Label: View>: View {
 
 /// 用于次要操作的描边按钮样式。
 struct FocusoryOutlineButtonStyle: ButtonStyle {
-    /// 定义按钮文案与边框共用的主色。
+    /// 按钮文字和边框的颜色。
     let color: Color
-    /// 定义按钮悬停或按压时的背景色。
+    /// 按钮悬停或按下时的背景色。
     let hoverBackground: Color
 
     /// 根据按压状态构建描边按钮的可视内容。
@@ -103,16 +103,16 @@ struct FocusoryOutlineButtonStyle: ButtonStyle {
 
 /// 呈现描边按钮在默认、悬停和按压状态下外观的内部视图。
 private struct FocusoryOutlineButtonBody<Label: View>: View {
-    /// 保存由按钮调用方提供的标签内容。
+    /// 调用方提供的按钮文字或图标。
     let label: Label
-    /// 表示按钮当前是否正处于按压状态。
+    /// 按钮是否正在按下，决定按压外观。
     let isPressed: Bool
-    /// 保存按钮文案与边框共用的主色。
+    /// 按钮文字和边框的颜色。
     let color: Color
-    /// 保存按钮悬停或按压时的背景色。
+    /// 按钮悬停或按下时的背景色。
     let hoverBackground: Color
 
-    /// 记录指针当前是否位于按钮交互区域内。
+    /// 指针是否停留在按钮内，决定悬停外观。
     @State private var isHovering = false
 
     /// 根据悬停和按压状态渲染描边按钮。
@@ -135,7 +135,7 @@ private struct FocusoryOutlineButtonBody<Label: View>: View {
 
 /// 用于编辑、删除等紧凑卡片操作的图标按钮样式。
 struct FocusoryIconButtonStyle: ButtonStyle {
-    /// 标识按钮是普通操作还是破坏性操作。
+    /// 操作角色，用于区分普通按钮和删除等危险操作的颜色。
     let role: ButtonRole?
 
     /// 根据按钮角色和按压状态构建图标按钮。
@@ -146,14 +146,14 @@ struct FocusoryIconButtonStyle: ButtonStyle {
 
 /// 呈现图标按钮的普通与破坏性交互状态的内部视图。
 private struct FocusoryIconButtonBody<Label: View>: View {
-    /// 保存由按钮调用方提供的图标标签。
+    /// 调用方提供的按钮图标。
     let label: Label
-    /// 表示按钮当前是否正处于按压状态。
+    /// 按钮是否正在按下，决定按压外观。
     let isPressed: Bool
-    /// 标识按钮是普通操作还是破坏性操作。
+    /// 操作角色，用于区分普通按钮和删除等危险操作的颜色。
     let role: ButtonRole?
 
-    /// 记录指针当前是否位于按钮交互区域内。
+    /// 指针是否停留在按钮内，决定悬停外观。
     @State private var isHovering = false
 
     /// 根据按钮角色、悬停和按压状态渲染图标按钮。

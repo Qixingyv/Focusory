@@ -2,7 +2,7 @@ import Foundation
 
 /// 查询当前账户的任务列表与三状态计数。
 struct ListTasksQuery {
-    /// 用例依赖。
+    /// 查询任务、会话和每日进度所需的能力，以及当前账户和日期来源。
     let environment: TaskUseCaseEnvironment
 
     /// 生成指定状态的任务列表快照；失败时抛 `TaskFailure(.persistenceFailed)`。

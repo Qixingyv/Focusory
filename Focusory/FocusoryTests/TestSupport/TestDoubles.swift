@@ -20,7 +20,7 @@ func makeInstant(of localDate: LocalDate, in timeZoneID: TimeZoneID) -> Date {
 /// 可控时钟；测试通过它固定当前瞬时。
 @MainActor
 final class FixedClock: Clock {
-    /// 当前瞬时。
+    /// 测试指定的当前时刻，可修改以模拟时间推进。
     var now: Date
 
     /// 用固定瞬时创建时钟。
@@ -31,7 +31,7 @@ final class FixedClock: Clock {
 
 /// 固定时区的测试日历；让跨日归属稳定可断言。
 struct FixedCalendarProvider: CalendarProvider {
-    /// 固定时区标识。
+    /// 测试指定的时区，避免日期断言受机器设置影响。
     let timeZoneID: TimeZoneID
 
     /// 用给定 IANA 标识创建测试日历，无法解析时退回 GMT。
@@ -54,11 +54,11 @@ struct FixedAccountProvider: CurrentAccountProvider {
 /// 可注入锁定状态并记录交接配置的计时桩。
 @MainActor
 final class StubFocusTimerService: FocusTimerService {
-    /// 被计时锁定的任务标识。
+    /// 模拟正在运行或暂停中的任务，供验证禁止修改的操作。
     var lockedTaskIDs: Set<UUID> = []
-    /// 开始专注时返回的结果。
+    /// 测试预设的启动结果，用于模拟成功或拒绝。
     var startOutcome: StartFocusOutcome = .started
-    /// 依次交接的本轮配置。
+    /// 按调用顺序记录收到的专注配置，供测试检查交接内容。
     private(set) var handedOffConfigurations: [TaskRunConfiguration] = []
 
     /// 判断任务是否被锁定。

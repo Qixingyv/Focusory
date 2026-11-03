@@ -7,6 +7,6 @@ struct LocalWorkspaceAccountProvider: CurrentAccountProvider {
         rawValue: UUID(uuidString: "F0C05000-0000-4000-8000-000000000001") ?? UUID()
     )
 
-    /// 当前账户标识。
+    /// 向业务用例提供本机工作空间账户，统一数据访问范围。
     var currentAccountID: AccountID { Self.localWorkspaceAccountID }
 }

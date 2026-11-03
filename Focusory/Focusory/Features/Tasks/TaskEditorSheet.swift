@@ -1,41 +1,41 @@
 import Foundation
 import SwiftUI
 
-/// 提供创建或编辑待办与持续任务的模态表单，并就地展示字段化错误。
+/// 提供新建和编辑任务的表单，并在对应字段旁显示校验错误。
 struct TaskEditorSheet: View {
     /// 关闭当前任务编辑弹窗的系统动作。
     @Environment(\.dismiss) private var dismiss
 
-    /// 保存正在编辑的原任务；空值表示正在创建任务。
+    /// 编辑前的任务，用于初始化表单和保留原模式；为空表示新建。
     private let originalTask: FocusTask?
-    /// 表示原任务是否已有历史会话；决定持续任务配置开关是否锁定。
+    /// 原任务是否已有会话，决定持续任务的两个配置开关能否修改。
     private let hasHistory: Bool
     /// 本机日历；在日期选择器结果与本机日期之间换算。
     private let calendar: any CalendarProvider
-    /// 提交草稿；返回非空表示保存失败并就地展示。
+    /// 将草稿交给上层保存；返回 nil 时关闭弹窗，否则显示失败原因。
     private let onSubmit: (TaskDraft) -> TaskFailure?
 
-    /// 保存用户当前输入的任务名称。
+    /// 表单中的任务名称，保存成功前不直接修改原任务。
     @State private var taskName: String
-    /// 保存新任务选择的模式，编辑现有任务时不可更改。
+    /// 新建任务时选择的模式；编辑已有任务时保留原模式。
     @State private var selectedMode: FocusTaskMode
-    /// 保存待办任务计划完成的番茄总数。
+    /// 表单中待提交的待办番茄总目标。
     @State private var todoTarget: Int
-    /// 保存每轮专注计时的分钟数。
+    /// 表单中待提交的每轮专注时长，单位为分钟。
     @State private var focusDurationMinutes: Int
-    /// 保存每轮休息计时的分钟数。
+    /// 表单中待提交的每轮休息时长，单位为分钟。
     @State private var breakDurationMinutes: Int
-    /// 表示持续任务是否设置计划日期范围。
+    /// 是否启用计划日期范围，决定日期字段是否显示和提交。
     @State private var hasDateRange: Bool
-    /// 保存持续任务计划开始的本机日期。
+    /// 日期选择器中的开始日期，提交时按本机日历换算。
     @State private var startDate: Date
-    /// 保存持续任务计划结束的本机日期。
+    /// 日期选择器中的截止日期，提交时按本机日历换算。
     @State private var endDate: Date
-    /// 表示持续任务是否设置每日番茄目标。
+    /// 是否启用每日目标，决定目标字段是否显示和提交。
     @State private var hasDailyTarget: Bool
-    /// 保存持续任务每天计划完成的番茄数。
+    /// 表单中待提交的每日番茄目标。
     @State private var dailyTarget: Int
-    /// 保存最近一次保存失败的字段化原因。
+    /// 最近一次保存失败的原因，供字段旁或表单整体显示。
     @State private var failure: TaskFailure?
 
     /// 创建任务编辑器，并从可选原任务与历史状态初始化表单。
@@ -166,7 +166,8 @@ struct TaskEditorSheet: View {
                 numberField(
                     title: .tasksEditorTodoTargetLabel,
                     currentValue: $todoTarget,
-                    allowedRange: 1...999
+                    allowedRange: 1...999,
+                    accessibilityIdentifierPrefix: "task-todo-target-stepper"
                 )
                 fieldFailure(.todoTarget)
             }
@@ -211,7 +212,8 @@ struct TaskEditorSheet: View {
                     numberField(
                         title: .tasksEditorDailyTargetLabel,
                         currentValue: $dailyTarget,
-                        allowedRange: 1...999
+                        allowedRange: 1...999,
+                        accessibilityIdentifierPrefix: "task-daily-target-stepper"
                     )
                     fieldFailure(.dailyTarget)
                 }
@@ -227,7 +229,8 @@ struct TaskEditorSheet: View {
                     title: .tasksEditorFocusDurationLabel,
                     currentValue: $focusDurationMinutes,
                     allowedRange: TaskRules.minimumFocusDurationMinutes...TaskRules.maximumFocusDurationMinutes,
-                    step: TaskRules.focusDurationStepMinutes
+                    step: TaskRules.focusDurationStepMinutes,
+                    accessibilityIdentifierPrefix: "task-focus-duration-stepper"
                 )
                 fieldFailure(.focusDuration)
             }
@@ -235,7 +238,8 @@ struct TaskEditorSheet: View {
                 numberField(
                     title: .tasksEditorBreakDurationLabel,
                     currentValue: $breakDurationMinutes,
-                    allowedRange: TaskRules.minimumBreakDurationMinutes...TaskRules.maximumBreakDurationMinutes
+                    allowedRange: TaskRules.minimumBreakDurationMinutes...TaskRules.maximumBreakDurationMinutes,
+                    accessibilityIdentifierPrefix: "task-break-duration-stepper"
                 )
                 fieldFailure(.breakDuration)
             }
@@ -275,7 +279,7 @@ struct TaskEditorSheet: View {
         .padding(.bottom, 20)
     }
 
-    /// 在出现无法定位到字段的失败时显示整体提示。
+    /// 是否需要显示表单整体错误，而非某个字段旁的错误。
     private var isGeneralFailure: Bool {
         guard let failure else { return false }
         return failure.field == nil
@@ -300,7 +304,7 @@ struct TaskEditorSheet: View {
         }
     }
 
-    /// 返回移除首尾空白和换行后的任务名称。
+    /// 去除首尾空白后的名称，用于判断保存按钮是否可用。
     private var trimmedTaskName: String {
         taskName.trimmingCharacters(in: .whitespacesAndNewlines)
     }
@@ -332,14 +336,16 @@ struct TaskEditorSheet: View {
         title: LocalizedStringResource,
         currentValue: Binding<Int>,
         allowedRange: ClosedRange<Int>,
-        step: Int = 1
+        step: Int = 1,
+        accessibilityIdentifierPrefix: String
     ) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             fieldLabel(title)
             FocusoryNumberStepper(
                 currentValue: currentValue,
                 allowedRange: allowedRange,
-                step: step
+                step: step,
+                accessibilityIdentifierPrefix: accessibilityIdentifierPrefix
             )
         }
         .frame(maxWidth: .infinity, alignment: .leading)

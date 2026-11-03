@@ -1,19 +1,19 @@
 import Foundation
 import SwiftData
 
-/// 组装根：创建本地容器与共享上下文，并把端口实现装配为用例依赖。
+/// 创建本地存储，并将仓储、事务和系统能力连接到业务用例。
 @MainActor
 final class AppDependencies {
-    /// 本地模型容器。
+    /// 本地数据库容器，仓储和事务共用的上下文由它创建。
     let container: ModelContainer
-    /// 任务用例共享依赖。
+    /// 任务操作共用的仓储、事务、账户和时间等能力。
     let taskEnvironment: TaskUseCaseEnvironment
-    /// 当前本机工作空间的账户标识。
+    /// 当前本机账户标识；任务环境使用同一个账户。
     let currentAccountID: AccountID
     /// 启动参数：改用内存存储，供 UI 测试在干净数据上运行。
     static let inMemoryStoreLaunchArgument = "-focusory-in-memory-store"
 
-    /// 用给定容器与端口实现装配依赖；全部仓储共享同一个关闭自动保存的上下文。
+    /// 连接存储与业务能力；仓储和事务共用一个关闭自动保存的上下文。
     init(
         container: ModelContainer,
         focusTimer: any FocusTimerService = PlaceholderFocusTimerService(),

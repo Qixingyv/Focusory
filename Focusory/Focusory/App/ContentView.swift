@@ -1,22 +1,22 @@
 import Foundation
 import SwiftUI
 
-/// 使用系统标签导航组织页面标题和当前功能内容的应用主视图。
+/// 提供任务、专注和统计之间的切换，并组合各页面的页头与内容。
 struct ContentView: View {
-    /// 组装根提供的用例依赖。
+    /// 应用启动时创建的依赖，用来初始化任务列表模型。
     let dependencies: AppDependencies
-    /// 记录系统标签栏当前选中的顶层功能目的地。
+    /// 当前选中的业务页面，与 TabView 的选择双向同步。
     @State private var selectedDestination: AppDestination = .tasks
-    /// 持有任务页面在主视图生命周期内共享的界面状态。
+    /// 保存任务列表状态，切换顶层页面时继续使用。
     @State private var taskListModel: TaskListModel
 
-    /// 用组装根依赖创建主视图与任务页面状态。
+    /// 接收应用依赖，并为任务列表状态提供初始对象。
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
         _taskListModel = State(initialValue: TaskListModel(environment: dependencies.taskEnvironment))
     }
 
-    /// 通过可适应侧边栏的系统标签视图组合应用顶层导航和功能页面。
+    /// 显示侧边栏导航及当前选中的业务页面。
     var body: some View {
         TabView(selection: $selectedDestination) {
             ForEach(AppDestination.allCases) { destination in
@@ -43,7 +43,7 @@ struct ContentView: View {
         .preferredColorScheme(.light)
     }
 
-    /// 组装给定目的地的页头与功能内容。
+    /// 将指定页面的页头和功能内容上下排列。
     private func destinationPage(_ destination: AppDestination) -> some View {
         VStack(spacing: 0) {
             pageHeader(for: destination)
@@ -92,7 +92,7 @@ struct ContentView: View {
         .accessibilityIdentifier("page-header")
     }
 
-    /// 返回给定目的地对应的功能页面。
+    /// 根据导航选择提供任务、专注或统计页面。
     @ViewBuilder
     private func destinationContent(for destination: AppDestination) -> some View {
         switch destination {

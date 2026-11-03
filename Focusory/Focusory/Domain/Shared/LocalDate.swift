@@ -2,7 +2,7 @@ import Foundation
 
 /// IANA 时区标识；用于把瞬时换算为用户本机日期。
 struct TimeZoneID: Hashable, Sendable {
-    /// 例如 `Asia/Shanghai`。
+    /// 时区名称，如 `Asia/Shanghai`，供保存和日期换算使用。
     let identifier: String
 
     /// 接受可解析的 IANA 标识，否则返回 nil。
@@ -16,7 +16,7 @@ struct TimeZoneID: Hashable, Sendable {
         identifier = timeZone.identifier
     }
 
-    /// 解析为系统时区；标识失效时退回 GMT，避免读取历史快照时崩溃。
+    /// 该标识对应的时区；标识失效时退回 GMT，避免读取历史快照时崩溃。
     var timeZone: TimeZone {
         TimeZone(identifier: identifier) ?? TimeZone(secondsFromGMT: 0) ?? .gmt
     }
@@ -24,11 +24,11 @@ struct TimeZoneID: Hashable, Sendable {
 
 /// 用户本机日历中的某一天；不带时刻，必须与时区标识成对使用。
 struct LocalDate: Hashable, Comparable, Sendable {
-    /// 年
+    /// 公历年份。
     let year: Int
-    /// 月
+    /// 公历月份。
     let month: Int
-    /// 日
+    /// 公历月中的日期。
     let day: Int
 
     /// 创建本机日期；字段越界或该日不存在时返回 nil。
@@ -70,7 +70,7 @@ struct LocalDate: Hashable, Comparable, Sendable {
         ) ?? LocalDate(year: 1970, month: 1, day: 1)!
     }
 
-    /// 返回该日本地零点；用于按日期范围排序或比较。
+    /// 返回该日在该时区的零点时刻，供日期选择器和展示换算使用。
     func startInstant(in timeZone: TimeZone) -> Date? {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = timeZone

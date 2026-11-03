@@ -50,7 +50,7 @@ struct GoalAdjustmentResult: Equatable, Sendable {
     /// 表示本次提交是同一操作标识的重放，未再次修改目标。
     let isReplay: Bool
 
-    /// 追加后的目标反馈子状态。
+    /// 按新目标判断是否仍然达标，供界面更新反馈。
     var feedback: TaskGoalFeedback {
         TaskGoalFeedback.resolve(completedPomodoroCount: completedPomodoroCount, effectiveTarget: newTarget)
     }
@@ -58,7 +58,7 @@ struct GoalAdjustmentResult: Equatable, Sendable {
 
 /// 一轮专注开始时固化的配置；本轮内不被任务编辑改写。
 struct TaskRunConfiguration: Equatable, Sendable {
-    /// 本轮关联任务。
+    /// 本轮专注关联的任务标识，供计时服务识别任务。
     let taskID: UUID
     /// 开始时的任务名。
     let taskName: String
@@ -70,7 +70,7 @@ struct TaskRunConfiguration: Equatable, Sendable {
     let breakDurationMinutes: Int
 }
 
-/// 开始专注的业务判定；拒绝时附带唯一可理解的原因。
+/// 开始专注前的业务判定，说明允许开始、拒绝原因或尚未到开始日。
 enum StartDecision: Equatable, Sendable {
     /// 可以开始，并携带固化的本轮配置。
     case allowed(TaskRunConfiguration)

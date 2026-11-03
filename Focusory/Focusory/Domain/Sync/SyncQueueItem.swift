@@ -27,32 +27,32 @@ enum SyncQueueStatus: String, Equatable, Sendable {
 struct SyncQueueItem: Identifiable, Equatable, Sendable {
     /// 幂等操作标识；同一标识重复上传不得重复产生业务结果。
     let operationID: UUID
-    /// 队列项标识等于操作标识。
+    /// 沿用操作标识，让同一同步操作保持同一个身份。
     var id: UUID { operationID }
-    /// 所属账户。
+    /// 数据所属的账户，用于隔离不同账户的数据。
     let ownerID: AccountID
-    /// 指向的实体类型。
+    /// 变更对应的数据类型，决定上传哪类业务数据。
     let entityType: SyncEntityType
-    /// 指向的实体标识。
+    /// 发生变更的业务对象标识，用于找到待上传数据。
     let entityID: UUID
-    /// 业务操作类型。
+    /// 本次变更是创建、更新、删除还是追加目标。
     let operationType: SyncOperationType
-    /// 负载 schema 版本。
+    /// 同步数据的格式版本，供上传时选择对应格式。
     let payloadSchemaVersion: Int
-    /// 当前同步状态。
+    /// 当前上传状态，供同步流程判断下一步操作。
     private(set) var status: SyncQueueStatus
-    /// 已尝试上传次数。
+    /// 已尝试上传的次数，供重试策略使用。
     private(set) var attemptCount: Int
-    /// 下次可尝试时刻。
+    /// 下次允许重试上传的时刻；为空表示未设置。
     private(set) var nextAttemptAt: Date?
-    /// 最近一次失败码。
+    /// 最近一次上传失败的错误码；尚未记录失败时为空。
     private(set) var lastErrorCode: String?
-    /// 入队瞬时。
+    /// 加入同步队列的时刻。
     let createdAt: Date
-    /// 最近更新瞬时。
+    /// 最近修改时刻。
     private(set) var updatedAt: Date
 
-    /// 当前客户端支持的负载 schema 版本。
+    /// 当前创建的队列项使用的同步数据格式版本。
     static let currentPayloadSchemaVersion = 1
 
     /// 以等待同步状态创建一个队列项。

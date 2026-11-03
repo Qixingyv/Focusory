@@ -1,5 +1,6 @@
 import XCTest
 
+/// 验证主界面入口、顶层页面切换和启动性能。
 final class FocusoryUITests: XCTestCase {
 
     /// 在每个 UI 测试前启用失败即停，避免在无效界面状态上继续操作。

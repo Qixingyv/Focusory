@@ -1,11 +1,11 @@
 import Foundation
 @testable import Focusory
 
-/// 测试用的已保存会话事实；F01 只按任务推导会话数与累计时长。
+/// 测试中的会话记录，用于准备任务完成数和累计专注时长。
 struct SessionFixture: Equatable {
     /// 会话标识。
     let id: UUID
-    /// 所属账户。
+    /// 数据所属的账户，用于隔离不同账户的数据。
     let ownerID: AccountID
     /// 关联任务。
     let taskID: UUID
@@ -15,7 +15,7 @@ struct SessionFixture: Equatable {
 
 /// 每日进度的内存键；对应「任务 + 本机日期」唯一约束。
 struct DailyProgressKey: Hashable {
-    /// 所属账户。
+    /// 数据所属的账户，用于隔离不同账户的数据。
     let ownerID: AccountID
     /// 关联任务。
     let taskID: UUID
@@ -23,18 +23,18 @@ struct DailyProgressKey: Hashable {
     let localDate: LocalDate
 }
 
-/// 内存本地事实集合；供内存仓储读写，并被事务实现整体快照与回滚。
+/// 集中保存测试数据，让各仓储和事务操作同一份数据。
 @MainActor
 final class InMemoryLocalStore {
-    /// 按标识保存任务。
+    /// 测试中的任务数据，按标识查询和更新。
     var tasks: [UUID: FocusTask] = [:]
-    /// 已保存会话事实。
+    /// 测试准备的会话记录，用于计算完成数和时长。
     var sessions: [SessionFixture] = []
-    /// 按「任务 + 日期」保存每日进度。
+    /// 按账户、任务和日期保存的测试进度。
     var dailyProgress: [DailyProgressKey: TaskDailyProgress] = [:]
-    /// 按操作标识保存同步队列项。
+    /// 测试中的待上传操作，按操作标识去重。
     var syncQueue: [UUID: SyncQueueItem] = [:]
-    /// 注入的提交失败；非空时下一次提交整体回滚并抛出它。
+    /// 模拟提交失败的错误；非空时每次提交都会回滚并抛出该错误。
     var commitFailure: Error?
 
     /// 记录一条已保存会话事实。
@@ -61,7 +61,7 @@ final class InMemoryLocalStore {
         dailyProgress[DailyProgressKey(ownerID: progress.ownerID, taskID: progress.taskID, localDate: progress.localDate)] = progress
     }
 
-    /// 当前全部内存事实的完整快照。
+    /// 复制当前测试数据，供事务失败时整体还原。
     func makeSnapshot() -> InMemorySnapshot {
         InMemorySnapshot(
             tasks: tasks,
@@ -80,22 +80,22 @@ final class InMemoryLocalStore {
     }
 }
 
-/// 内存事实的不可变快照。
+/// 事务开始前的测试数据副本，用于失败后的整体回滚。
 struct InMemorySnapshot {
-    /// 任务快照。
+    /// 回滚时要恢复的任务数据。
     let tasks: [UUID: FocusTask]
-    /// 会话快照。
+    /// 回滚时要恢复的会话记录。
     let sessions: [SessionFixture]
-    /// 每日进度快照。
+    /// 回滚时要恢复的每日进度。
     let dailyProgress: [DailyProgressKey: TaskDailyProgress]
-    /// 同步队列快照。
+    /// 回滚时要恢复的待上传操作。
     let syncQueue: [UUID: SyncQueueItem]
 }
 
-/// 内存实时任务仓储。
+/// 在内存中读写任务，供业务用例测试替代真实数据库。
 @MainActor
 final class InMemoryTaskRepository: TaskRepository {
-    /// 共享内存存储。
+    /// 仓储与事务共用的测试数据，供查询、写入和回滚验证。
     private let store: InMemoryLocalStore
 
     /// 用共享存储创建仓储。
@@ -134,7 +134,7 @@ final class InMemoryTaskRepository: TaskRepository {
 /// 内存会话查询仓储。
 @MainActor
 final class InMemorySessionRepository: SessionRepository {
-    /// 共享内存存储。
+    /// 仓储与事务共用的测试数据，供查询、写入和回滚验证。
     private let store: InMemoryLocalStore
 
     /// 用共享存储创建仓储。
@@ -158,7 +158,7 @@ final class InMemorySessionRepository: SessionRepository {
 /// 内存每日进度仓储。
 @MainActor
 final class InMemoryDailyProgressRepository: DailyProgressRepository {
-    /// 共享内存存储。
+    /// 仓储与事务共用的测试数据，供查询、写入和回滚验证。
     private let store: InMemoryLocalStore
 
     /// 用共享存储创建仓储。
@@ -182,7 +182,7 @@ final class InMemoryDailyProgressRepository: DailyProgressRepository {
 /// 内存同步队列仓储。
 @MainActor
 final class InMemorySyncQueueRepository: SyncQueueRepository {
-    /// 共享内存存储。
+    /// 仓储与事务共用的测试数据，供查询、写入和回滚验证。
     private let store: InMemoryLocalStore
 
     /// 用共享存储创建仓储。
@@ -206,7 +206,7 @@ final class InMemorySyncQueueRepository: SyncQueueRepository {
 /// 内存原子提交；闭包失败或注入提交失败时把全部写入还原为提交前状态。
 @MainActor
 final class InMemoryLocalTransaction: LocalTransaction {
-    /// 共享内存存储。
+    /// 仓储与事务共用的测试数据，供查询、写入和回滚验证。
     private let store: InMemoryLocalStore
 
     /// 用共享存储创建事务执行器。

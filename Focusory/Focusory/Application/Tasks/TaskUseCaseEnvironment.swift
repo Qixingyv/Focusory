@@ -1,24 +1,24 @@
 import Foundation
 
-/// 任务用例共享的依赖集合；由组装根创建，用例不自行实例化技术适配器。
+/// 集中提供任务用例需要的外部能力，由应用入口连接真实或测试实现。
 struct TaskUseCaseEnvironment {
-    /// 任务仓储。
+    /// 读取、保存和删除任务。
     let tasks: any TaskRepository
-    /// 会话查询。
+    /// 查询已保存的会话，用于判断历史记录和计算累计进度。
     let sessions: any SessionRepository
-    /// 每日进度仓储。
+    /// 读取和保存按任务、本机日期区分的每日进度。
     let dailyProgress: any DailyProgressRepository
-    /// 同步队列仓储。
+    /// 保存待上传变更，并查询操作是否已经生效。
     let syncQueue: any SyncQueueRepository
-    /// 本地原子提交。
+    /// 让业务数据与待同步变更一起提交，失败时一起回滚。
     let transaction: any LocalTransaction
-    /// 当前账户。
+    /// 提供当前账户，限定本次操作可以访问的数据。
     let account: any CurrentAccountProvider
-    /// 本机日历。
+    /// 将时刻换算为本机日期，用于计划日期和当日目标判断。
     let calendar: any CalendarProvider
-    /// 当前瞬时。
+    /// 提供业务操作的当前时刻，测试时可替换为固定时钟。
     let clock: any Clock
-    /// F02 计时能力。
+    /// 查询任务是否被计时锁定，并交接开始专注时的配置。
     let focusTimer: any FocusTimerService
 }
 
@@ -30,6 +30,9 @@ extension TaskUseCaseEnvironment {
         } catch let failure as TaskFailure {
             throw failure
         } catch {
+            #if DEBUG
+            print("[Focusory][Tasks] read failed: \(error)")
+            #endif
             throw TaskFailure(.persistenceFailed)
         }
     }
@@ -41,6 +44,9 @@ extension TaskUseCaseEnvironment {
         } catch let failure as TaskFailure {
             throw failure
         } catch {
+            #if DEBUG
+            print("[Focusory][Tasks] commit failed: \(error)")
+            #endif
             throw TaskFailure(.persistenceFailed)
         }
     }
@@ -63,7 +69,7 @@ extension TaskUseCaseEnvironment {
         try read { try syncQueue.item(operationID: operationID, ownerID: ownerID) != nil }
     }
 
-    /// 在事务内追加一条待同步变更。
+    /// 追加一条待同步变更；调用方须把它放在本地事务中提交。
     func enqueueChange(
         entityType: SyncEntityType,
         entityID: UUID,

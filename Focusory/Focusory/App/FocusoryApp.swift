@@ -3,7 +3,7 @@ import SwiftUI
 /// 启动 Focusory 主窗口并配置 macOS 窗口外观与尺寸的应用入口。
 @main
 struct FocusoryApp: App {
-    /// 装配结果；为空时界面显示可重试的启动错误而不进入功能页。
+    /// 保存启动所需的依赖；创建失败时为空，改为显示重试界面。
     @State private var dependencies: AppDependencies?
 
     /// 启动应用并尝试装配依赖；UI 测试通过启动参数改用内存存储。
@@ -15,7 +15,7 @@ struct FocusoryApp: App {
         }
     }
 
-    /// 定义 Focusory 唯一主窗口的根场景与默认窗口行为。
+    /// 定义主窗口场景，配置初始尺寸、标题栏和最小尺寸约束。
     var body: some Scene {
         WindowGroup {
             if let dependencies {
@@ -34,7 +34,7 @@ struct FocusoryApp: App {
 
 /// 本地存储无法打开时显示的可重试启动错误界面。
 struct StartupFailureView: View {
-    /// 用户点击重试时重新装配依赖。
+    /// 用户点击重试后执行的操作，由应用入口重新创建依赖。
     let onRetry: () -> Void
 
     /// 显示失败说明与重试入口。
