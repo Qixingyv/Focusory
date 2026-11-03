@@ -20,8 +20,8 @@
 | F00 | 02 | `foc-codex-f00-02-chore-isolate-project-rules` | 隔离项目规则整理 | [`F00-02-隔离项目规则整理.md`](./F00-02-隔离项目规则整理.md) | 已终止 |
 | F00 | 03 | `foc-codex-f00-03-chore-isolate-macos-work` | 隔离macOS前端现有改动 | [`F00-03-隔离macOS前端现有改动.md`](./F00-03-隔离macOS前端现有改动.md) | 已终止 |
 | F00 | 04 | `foc-codex-f00-04-chore-isolate-backend-work` | 隔离Python后端工作基线 | [`F00-04-隔离Python后端工作基线.md`](./F00-04-隔离Python后端工作基线.md) | 已终止 |
-| F00 | 05 | `foc-codex-f00-05-chore-technical-workspace` | 建立技术工作分支 | [`F00-05-建立技术工作分支.md`](./F00-05-建立技术工作分支.md) | 已验收 |
-| F00 | 06 | `foc-codex-f00-06-chore-business-design-workspace` | 建立业务设计工作分支 | [`F00-06-建立业务设计工作分支.md`](./F00-06-建立业务设计工作分支.md) | 已验收 |
+| F00 | 05 | `foc-codex-f00-05-chore-technical-workspace` | 建立技术工作分支 | [`F00-05-建立技术工作分支.md`](./F00-05-建立技术工作分支.md) | 已合并 |
+| F00 | 06 | `foc-codex-f00-06-chore-business-design-workspace` | 建立业务设计工作分支 | [`F00-06-建立业务设计工作分支.md`](./F00-06-建立业务设计工作分支.md) | 已合并 |
 | 不适用 | 不适用 | 建立规则前未记录 | 按页面与职责拆分 `FocusoryUI.swift` | [`SwiftUI页面文件拆分.md`](./SwiftUI页面文件拆分.md) | 已完成（历史记录） |
 
 状态统一使用：`待开发`、`开发中`、`待人工验收`、`已验收`、`已合并` 或 `已终止`。
